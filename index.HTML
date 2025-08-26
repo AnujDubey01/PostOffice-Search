@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post Office Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app" id="startScreen">
+  <div class="left">
+    <h2>Post Office Application.</h2>
+    <p>This Application allows you to extract information about the nearest Post Offices, based on your location.</p>
+    <img src="/SearchPost/undraw_messenger_re_8bky 1.png" alt="error">
+  </div>
+  <div class="right">
+    <h3>Your Current IP Address is <span id="startIP">...</span></h3>
+    <button onclick="init()">Get Started</button>
+  </div>
+</div>
+
+<div id="mainApp" style="display:none;">
+  <div class="info-section">
+    <p id="ip"></p>
+    <p id="city"></p>
+    <p id="region"></p>
+    <p id="org"></p>
+    <p id="time"></p>
+    <div class="map" id="map"></div>
+
+    <h3>Post Offices Near You</h3>
+    <input type="text" id="searchInput" placeholder="Search by Name or Branch Type">
+    <div class="cards" id="postOffices"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
