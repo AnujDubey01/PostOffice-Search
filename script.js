@@ -1,17 +1,17 @@
 let postOffices = [];
-
+// get users ip
 async function getIP() {
   let res = await fetch("https://api64.ipify.org?format=json");
   let data = await res.json();
   return data.ip;
 }
-
+// convert it into location 
 async function getUserInfo(ip) {
   let res = await fetch(`https://ipapi.co/${ip}/json/`);
   let data = await res.json();
   return data;
 }
-
+// load it into map 
 function loadMap(lat, lon) {
   let mapFrame = document.getElementById("map");
   mapFrame.innerHTML = `<iframe 
@@ -21,19 +21,19 @@ function loadMap(lat, lon) {
     allowfullscreen>
   </iframe>`;
 }
-
+// show local time
 function showTime(timezone) {
   let timeElem = document.getElementById("time");
   let now = new Date().toLocaleString("en-US", { timeZone: timezone });
   timeElem.textContent = "Current Time: " + now;
 }
-
+// fetch post office data
 async function getPostOffices(pincode) {
   let res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
   let data = await res.json();
   return data[0].PostOffice;
 }
-
+// render post office cards
 function renderPostOffices(list) {
   let container = document.getElementById("postOffices");
   container.innerHTML = "";
@@ -50,7 +50,7 @@ function renderPostOffices(list) {
     container.appendChild(div);
   });
 }
-
+// searh feature -> Filters post offices in real-time by name or branch type.
 document.getElementById("searchInput").addEventListener("input", (e) => {
   let query = e.target.value.toLowerCase();
   let filtered = postOffices.filter(office =>
@@ -59,7 +59,7 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   );
   renderPostOffices(filtered);
 });
-
+// Init Function (Triggered on "Get Started")
 async function init() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("mainApp").style.display = "block";
@@ -83,3 +83,4 @@ async function init() {
 getIP().then(ip => {
   document.getElementById("startIP").textContent = ip;
 });
+
